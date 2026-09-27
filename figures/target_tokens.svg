@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="380" viewBox="0 0 1180 380" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,1 L8,4.5 L0,8 Z" fill="#54606b"/>
+    </marker>
+    <g id="snow">
+      <g stroke="#5b83b0" stroke-width="1.3" stroke-linecap="round">
+        <line x1="0" y1="-6" x2="0" y2="6"/>
+        <line x1="-5.2" y1="-3" x2="5.2" y2="3"/>
+        <line x1="-5.2" y1="3" x2="5.2" y2="-3"/>
+      </g>
+    </g>
+  </defs>
+  <style>
+    .lab  { font-size: 14px; fill: #2b2f36; }
+    .labb { font-size: 14px; fill: #2b2f36; font-weight: 600; }
+    .sub  { font-size: 11px; fill: #6b7783; }
+    .tag  { font-size: 10.5px; fill: #7c8894; }
+    .flow { stroke: #54606b; stroke-width: 1.8; fill: none; }
+    .tealb{ fill: #cfe6da; stroke: #6fae90; stroke-width: 0.9; }
+  </style>
+
+  <text class="labb" x="40" y="30" font-size="16">Target-token construction &#8212; supervision for the adapter</text>
+
+  <!-- multi-view window -->
+  <rect x="46" y="70"  width="60" height="44" rx="3" fill="#dfe6ee" stroke="#9db4cd"/>
+  <rect x="40" y="77"  width="60" height="44" rx="3" fill="#e9eef4" stroke="#9db4cd"/>
+  <rect x="34" y="84"  width="60" height="44" rx="3" fill="#f4f7fa" stroke="#8aa3c0"/>
+  <circle cx="52" cy="104" r="5" fill="none" stroke="#8aa3c0"/>
+  <path d="M63,118 L73,100 L83,118 Z" fill="none" stroke="#8aa3c0"/>
+  <text class="sub" x="64" y="144" text-anchor="middle">multi-view window</text>
+  <text class="sub" x="64" y="157" text-anchor="middle">(N posed frames)</text>
+
+  <!-- scene mesh -->
+  <g stroke="#8aa3c0" fill="#eef2f6">
+    <path d="M40,214 L84,206 L100,224 L56,232 Z"/>
+    <path d="M40,214 L56,232 L56,258 L40,240 Z"/>
+    <path d="M56,232 L100,224 L100,250 L56,258 Z" fill="#e2e9f0"/>
+  </g>
+  <g stroke="#b9c6d6" stroke-width="0.6">
+    <line x1="40" y1="214" x2="100" y2="224"/><line x1="56" y1="232" x2="100" y2="250"/>
+  </g>
+  <text class="sub" x="66" y="278" text-anchor="middle">scene mesh (GT)</text>
+
+  <!-- arrows into frustum crop -->
+  <path class="flow" d="M100,106 C140,106 140,150 168,150" marker-end="url(#arrow)"/>
+  <path class="flow" d="M104,228 C140,228 140,178 168,178" marker-end="url(#arrow)"/>
+
+  <!-- frustum crop -->
+  <rect x="170" y="120" width="108" height="90" rx="7" fill="#eef2ee" stroke="#8fb59c" stroke-width="1.4"/>
+  <text class="labb" x="224" y="150" text-anchor="middle" fill="#3f6b52">Frustum crop</text>
+  <text class="sub"  x="224" y="169" text-anchor="middle">complete / amodal</text>
+  <text class="sub"  x="224" y="183" text-anchor="middle">(cameras' frusta,</text>
+  <text class="sub"  x="224" y="196" text-anchor="middle">no occlusion cull)</text>
+
+  <path class="flow" d="M278,165 L312,165" marker-end="url(#arrow)"/>
+
+  <!-- geometry pool -->
+  <g fill="#4f6f9c">
+    <circle cx="330" cy="140" r="2"/><circle cx="342" cy="136" r="2"/><circle cx="356" cy="140" r="2"/><circle cx="368" cy="138" r="2"/>
+    <circle cx="326" cy="152" r="2"/><circle cx="340" cy="150" r="2"/><circle cx="354" cy="154" r="2"/><circle cx="368" cy="151" r="2"/><circle cx="380" cy="150" r="2"/>
+    <circle cx="332" cy="164" r="2"/><circle cx="346" cy="166" r="2"/><circle cx="360" cy="164" r="2"/><circle cx="374" cy="166" r="2"/>
+    <circle cx="338" cy="178" r="2"/><circle cx="354" cy="178" r="2"/><circle cx="370" cy="178" r="2"/>
+  </g>
+  <text class="sub" x="352" y="200" text-anchor="middle">geometry pool</text>
+
+  <path class="flow" d="M392,165 L426,165" marker-end="url(#arrow)"/>
+
+  <!-- NOVA3R encoder (frozen) -->
+  <rect x="428" y="126" width="110" height="78" rx="6" fill="#e8eef5" stroke="#9db4cd" stroke-width="1.4"/>
+  <use href="#snow" x="522" y="142"/>
+  <text class="labb" x="479" y="160" text-anchor="middle">NOVA3R</text>
+  <text class="labb" x="479" y="177" text-anchor="middle">Encoder</text>
+  <text class="tag"  x="479" y="197" text-anchor="middle">frozen</text>
+  <text class="sub"  x="483" y="120" text-anchor="middle">sample 8192 pts &#183; &#215;30 seeds</text>
+
+  <path class="flow" d="M538,165 L572,165" marker-end="url(#arrow)"/>
+
+  <!-- 30 stochastic token sets (offset teal grids) -->
+  <g class="tealb" opacity="0.55">
+    <rect x="588" y="128" width="9" height="9" rx="1"/><rect x="599" y="128" width="9" height="9" rx="1"/><rect x="610" y="128" width="9" height="9" rx="1"/>
+    <rect x="588" y="139" width="9" height="9" rx="1"/><rect x="599" y="139" width="9" height="9" rx="1"/><rect x="610" y="139" width="9" height="9" rx="1"/>
+    <rect x="588" y="150" width="9" height="9" rx="1"/><rect x="599" y="150" width="9" height="9" rx="1"/><rect x="610" y="150" width="9" height="9" rx="1"/>
+  </g>
+  <g class="tealb" opacity="0.78">
+    <rect x="594" y="134" width="9" height="9" rx="1"/><rect x="605" y="134" width="9" height="9" rx="1"/><rect x="616" y="134" width="9" height="9" rx="1"/>
+    <rect x="594" y="145" width="9" height="9" rx="1"/><rect x="605" y="145" width="9" height="9" rx="1"/><rect x="616" y="145" width="9" height="9" rx="1"/>
+    <rect x="594" y="156" width="9" height="9" rx="1"/><rect x="605" y="156" width="9" height="9" rx="1"/><rect x="616" y="156" width="9" height="9" rx="1"/>
+  </g>
+  <g class="tealb">
+    <rect x="600" y="140" width="9" height="9" rx="1"/><rect x="611" y="140" width="9" height="9" rx="1"/><rect x="622" y="140" width="9" height="9" rx="1"/>
+    <rect x="600" y="151" width="9" height="9" rx="1"/><rect x="611" y="151" width="9" height="9" rx="1"/><rect x="622" y="151" width="9" height="9" rx="1"/>
+    <rect x="600" y="162" width="9" height="9" rx="1"/><rect x="611" y="162" width="9" height="9" rx="1"/><rect x="622" y="162" width="9" height="9" rx="1"/>
+  </g>
+  <text class="sub" x="612" y="196" text-anchor="middle">30 token sets</text>
+  <text class="sub" x="612" y="209" text-anchor="middle">(unordered)</text>
+
+  <path class="flow" d="M638,165 L672,165" marker-end="url(#arrow)"/>
+
+  <!-- Hungarian align + mean -->
+  <rect x="674" y="130" width="120" height="70" rx="7" fill="#fdf6ec" stroke="#d9a24e" stroke-width="1.3"/>
+  <text class="labb" x="734" y="157" text-anchor="middle" fill="#6b4a1c">Hungarian-align</text>
+  <text class="sub"  x="734" y="175" text-anchor="middle">to anchor, then</text>
+  <text class="sub"  x="734" y="188" text-anchor="middle">average over seeds</text>
+
+  <path class="flow" d="M794,165 L828,165" marker-end="url(#arrow)"/>
+
+  <!-- target tokens z* + variance -->
+  <g class="tealb" stroke-width="1.0">
+    <rect x="840" y="132" width="12" height="12" rx="1.5"/>
+    <rect x="840" y="146" width="12" height="12" rx="1.5"/>
+    <rect x="840" y="160" width="12" height="12" rx="1.5"/>
+    <rect x="840" y="174" width="12" height="12" rx="1.5"/>
+    <rect x="840" y="188" width="12" height="12" rx="1.5"/>
+  </g>
+  <!-- variance bars -->
+  <g fill="#c98f3f">
+    <rect x="858" y="134" width="16" height="4" rx="1"/><rect x="858" y="148" width="9"  height="4" rx="1"/>
+    <rect x="858" y="162" width="22" height="4" rx="1"/><rect x="858" y="176" width="6"  height="4" rx="1"/>
+    <rect x="858" y="190" width="13" height="4" rx="1"/>
+  </g>
+  <text class="labb" x="905" y="128" text-anchor="middle">target tokens z*</text>
+  <text class="sub"  x="905" y="215" text-anchor="middle">768 &#215; 128  +  per-token variance</text>
+
+  <!-- supervision note -->
+  <path class="flow" d="M890,232 C890,270 620,262 620,300" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+  <rect x="360" y="300" width="520" height="46" rx="8" fill="#fdf7ee" stroke="#d9a24e" stroke-width="1.3"/>
+  <text class="lab" x="620" y="322" text-anchor="middle" fill="#6b4a1c">z* is the training target: the adapter learns to predict it</text>
+  <text class="sub" x="620" y="338" text-anchor="middle">from the DA3 image tokens alone (no geometry at test time)</text>
+</svg>

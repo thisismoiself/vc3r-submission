@@ -1,0 +1,24 @@
+[
+  {
+    "cloud": 0,
+    "anchor_frame_index": 0,
+    "scale": 1.0,
+    "icp_transform": "rigid",
+    "icp_scale": 1.0,
+    "icp_accepted": true,
+    "optimized": false,
+    "fitness": null,
+    "inlier_rmse": null
+  },
+  {
+    "cloud": 1,
+    "anchor_frame_index": 40,
+    "scale": 1.0,
+    "icp_transform": "rigid",
+    "icp_scale": 0.9999999999999999,
+    "icp_accepted": true,
+    "optimized": true,
+    "fitness": 0.670787313810923,
+    "inlier_rmse": 0.026083530313340108
+  }
+]

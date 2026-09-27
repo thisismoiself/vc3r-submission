@@ -1,0 +1,16 @@
+Token MSE: 1.807213
+Chamfer pred <-> gt: 0.094770
+Chamfer AE <-> input: 0.020715
+
+Pred -> target NN distances:
+  mean: 0.197625
+  median: 0.159323
+  p90: 0.355786
+  p95: 0.480894
+  max: 0.889963
+
+Target -> pred NN distances:
+  mean: 0.170208
+  median: 0.156492
+  p90: 0.289182
+  p95: 0.343377

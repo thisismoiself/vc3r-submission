@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1760" height="980" viewBox="0 0 1760 980" role="img" aria-labelledby="title desc">
+  <title id="title">DA3 to NOVA3R alignment architecture</title>
+  <desc id="desc">DA3 source tokens are projected to hidden width 512. Learned NOVA3R-shaped target queries pass through four residual blocks, each with self-attention, cross-attention over the projected source tokens, and an MLP. A layer normalization and output projection emit 768 NOVA3R tokens of width 128.</desc>
+  <defs>
+    <style>
+      text { font-family: Inter, Arial, sans-serif; fill: #16202a; letter-spacing: 0; }
+      .title { font-size: 42px; font-weight: 700; }
+      .subtitle { font-size: 22px; fill: #43515f; }
+      .label { font-size: 24px; font-weight: 650; }
+      .body { font-size: 21px; }
+      .small { font-size: 18px; fill: #43515f; }
+      .shape { stroke: #16202a; stroke-width: 2.5; }
+      .shape.source { fill: #d9ecff; }
+      .shape.query { fill: #fff0c8; }
+      .shape.block { fill: #edf4e6; }
+      .shape.op { fill: #f4e7ff; }
+      .shape.output { fill: #ffdfe3; }
+      .shape.note { fill: #f7fafc; }
+      .lane { fill: none; stroke: #b8c5d1; stroke-width: 2; stroke-dasharray: 8 10; }
+      .arrow { fill: none; stroke: #16202a; stroke-width: 3; marker-end: url(#arrow); }
+      .source-arrow { fill: none; stroke: #2563eb; stroke-width: 3; marker-end: url(#arrow-blue); }
+      .residual { fill: none; stroke: #5f6b76; stroke-width: 2.25; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#16202a"/>
+    </marker>
+    <marker id="arrow-blue" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 12 6 L 0 12 z" fill="#2563eb"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1760" height="980" fill="#ffffff"/>
+  <text x="80" y="78" class="title">DA3 to NOVA3R Aligner</text>
+  <text x="80" y="118" class="subtitle">Architecture in depth_anything_3/model/nova3r_alignment.py</text>
+
+  <rect x="56" y="170" width="1648" height="248" rx="22" class="lane"/>
+  <rect x="56" y="476" width="1648" height="372" rx="22" class="lane"/>
+  <text x="82" y="204" class="small">DA3 source lane</text>
+  <text x="82" y="510" class="small">NOVA3R query lane</text>
+
+  <rect x="86" y="248" width="260" height="110" rx="12" class="shape source" fill="#d9ecff"/>
+  <text x="216" y="287" text-anchor="middle" class="label">DA3 source tokens</text>
+  <text x="216" y="323" text-anchor="middle" class="body">[B, N_da3, 2048]</text>
+
+  <rect x="418" y="248" width="242" height="110" rx="12" class="shape source" fill="#d9ecff"/>
+  <text x="539" y="287" text-anchor="middle" class="label">source_proj</text>
+  <text x="539" y="323" text-anchor="middle" class="body">Linear 2048 -> 512</text>
+
+  <rect x="734" y="248" width="310" height="110" rx="12" class="shape source" fill="#d9ecff"/>
+  <text x="889" y="287" text-anchor="middle" class="label">Projected source tokens</text>
+  <text x="889" y="323" text-anchor="middle" class="body">[B, N_da3, 512]</text>
+
+  <path d="M 346 303 H 418" class="arrow"/>
+  <path d="M 660 303 H 734" class="arrow"/>
+
+  <rect x="86" y="610" width="350" height="132" rx="12" class="shape query" fill="#fff0c8"/>
+  <text x="261" y="649" text-anchor="middle" class="label">Learned target_queries</text>
+  <text x="261" y="685" text-anchor="middle" class="body">768 NOVA3R-shaped queries</text>
+  <text x="261" y="718" text-anchor="middle" class="body">[768, 512] -> [B, 768, 512]</text>
+
+  <rect x="512" y="548" width="760" height="258" rx="18" class="shape block" fill="#edf4e6"/>
+  <text x="892" y="786" text-anchor="middle" class="label">4 x CrossAttentionBlock, hidden width 512</text>
+
+  <rect x="552" y="632" width="190" height="112" rx="10" class="shape note" fill="#f7fafc"/>
+  <text x="647" y="667" text-anchor="middle" class="body">Query LayerNorm</text>
+  <text x="647" y="700" text-anchor="middle" class="body">Self-attention</text>
+  <text x="647" y="729" text-anchor="middle" class="small">target queries</text>
+
+  <rect x="782" y="632" width="220" height="112" rx="10" class="shape note" fill="#f7fafc"/>
+  <text x="892" y="663" text-anchor="middle" class="body">Cross LayerNorms</text>
+  <text x="892" y="696" text-anchor="middle" class="body">Cross-attention</text>
+  <text x="892" y="726" text-anchor="middle" class="small">queries attend to source</text>
+
+  <rect x="1042" y="632" width="190" height="112" rx="10" class="shape note" fill="#f7fafc"/>
+  <text x="1137" y="667" text-anchor="middle" class="body">MLP LayerNorm</text>
+  <text x="1137" y="700" text-anchor="middle" class="body">FFN / MLP</text>
+  <text x="1137" y="729" text-anchor="middle" class="small">residual update</text>
+
+  <path d="M 436 676 H 512" class="arrow"/>
+  <path d="M 742 688 H 782" class="arrow"/>
+  <path d="M 1002 688 H 1042" class="arrow"/>
+  <path d="M 1232 688 H 1305" class="arrow"/>
+
+  <path d="M 552 622 C 552 590, 650 590, 650 622" class="residual"/>
+  <path d="M 641 610 L 650 622 L 659 610" class="residual"/>
+  <path d="M 782 622 C 782 590, 894 590, 894 622" class="residual"/>
+  <path d="M 885 610 L 894 622 L 903 610" class="residual"/>
+  <path d="M 1042 622 C 1042 590, 1138 590, 1138 622" class="residual"/>
+  <path d="M 1129 610 L 1138 622 L 1147 610" class="residual"/>
+
+  <path d="M 889 358 V 632" class="source-arrow"/>
+  <text x="1020" y="446" text-anchor="middle" class="small">projected source keys / values</text>
+  <text x="1020" y="474" text-anchor="middle" class="small">fed to cross-attention in each block</text>
+
+  <rect x="1305" y="610" width="170" height="132" rx="12" class="shape op" fill="#f4e7ff"/>
+  <text x="1390" y="650" text-anchor="middle" class="label">norm</text>
+  <text x="1390" y="685" text-anchor="middle" class="body">LayerNorm</text>
+  <text x="1390" y="718" text-anchor="middle" class="body">512 channels</text>
+
+  <rect x="1518" y="610" width="176" height="132" rx="12" class="shape op" fill="#f4e7ff"/>
+  <text x="1606" y="650" text-anchor="middle" class="label">out_proj</text>
+  <text x="1606" y="685" text-anchor="middle" class="body">Linear</text>
+  <text x="1606" y="718" text-anchor="middle" class="body">512 -> 128</text>
+
+  <path d="M 1475 676 H 1518" class="arrow"/>
+
+  <rect x="1340" y="862" width="354" height="86" rx="12" class="shape output" fill="#ffdfe3"/>
+  <text x="1517" y="899" text-anchor="middle" class="label">Predicted NOVA3R tokens</text>
+  <text x="1517" y="930" text-anchor="middle" class="body">[B, 768, 128]</text>
+  <path d="M 1606 742 V 862" class="arrow"/>
+
+  <rect x="86" y="862" width="816" height="86" rx="12" class="shape note" fill="#f7fafc"/>
+  <text x="112" y="898" class="body">Each block keeps 768 query tokens at width 512; gray arcs denote residual additions.</text>
+  <text x="112" y="930" class="body">Only out_proj changes them into NOVA3R token feature width 128.</text>
+</svg>

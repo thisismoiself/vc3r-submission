@@ -1,0 +1,74 @@
+{
+  "images": [
+    "/home/nic/repos/rci/courses/sa/vc3r/datasets/replica/room0/results/frame000000.jpg",
+    "/home/nic/repos/rci/courses/sa/vc3r/datasets/replica/room0/results/frame000020.jpg"
+  ],
+  "runs": 5,
+  "num_queries": 50000,
+  "resolution": [
+    518,
+    392
+  ],
+  "output_coordinate_frame": "world",
+  "traj": "/home/nic/repos/rci/courses/sa/vc3r/datasets/replica/room0/traj.txt",
+  "pose_type": "c2w",
+  "reference_frame_index": 0,
+  "merged_num_points": 250000,
+  "run_records": [
+    {
+      "run": 0,
+      "num_points": 50000,
+      "color_rgb": [
+        0.95,
+        0.2,
+        0.2
+      ],
+      "runtime_seconds": 0.7535839080810547,
+      "peak_memory_mb": 4529.07275390625
+    },
+    {
+      "run": 1,
+      "num_points": 50000,
+      "color_rgb": [
+        0.1,
+        0.35,
+        1.0
+      ],
+      "runtime_seconds": 0.6052720546722412,
+      "peak_memory_mb": 4554.44384765625
+    },
+    {
+      "run": 2,
+      "num_points": 50000,
+      "color_rgb": [
+        0.1,
+        0.7,
+        0.25
+      ],
+      "runtime_seconds": 0.6085257530212402,
+      "peak_memory_mb": 4554.02783203125
+    },
+    {
+      "run": 3,
+      "num_points": 50000,
+      "color_rgb": [
+        0.95,
+        0.7,
+        0.1
+      ],
+      "runtime_seconds": 0.6061921119689941,
+      "peak_memory_mb": 4554.91943359375
+    },
+    {
+      "run": 4,
+      "num_points": 50000,
+      "color_rgb": [
+        0.7,
+        0.25,
+        0.95
+      ],
+      "runtime_seconds": 0.6058387756347656,
+      "peak_memory_mb": 4555.69580078125
+    }
+  ]
+}

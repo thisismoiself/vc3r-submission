@@ -1,0 +1,185 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,1 L8,4.5 L0,8 Z" fill="#54606b"/>
+    </marker>
+    <g id="snow">
+      <g stroke="#5b83b0" stroke-width="1.3" stroke-linecap="round">
+        <line x1="0" y1="-6" x2="0" y2="6"/><line x1="-5.2" y1="-3" x2="5.2" y2="3"/><line x1="-5.2" y1="3" x2="5.2" y2="-3"/>
+      </g>
+    </g>
+    <g id="flame">
+      <path d="M0,-7 C4.2,-2.5 5,2 0,7 C-5,2 -4.2,-2.5 0,-7 Z" fill="#e8912f"/>
+      <path d="M0,-1 C2,1 2,3.4 0,5 C-2,3.4 -2,1 0,-1 Z" fill="#f6d18a"/>
+    </g>
+  </defs>
+  <style>
+    .lab  { font-size: 13.5px; fill: #2b2f36; }
+    .labb { font-size: 14px;  fill: #2b2f36; font-weight: 600; }
+    .sub  { font-size: 11px;  fill: #6b7783; }
+    .tag  { font-size: 10.5px; fill: #7c8894; }
+    .ttl  { font-size: 14px;  fill: #6b4a1c; font-weight: 600; }
+    .flow { stroke: #54606b; stroke-width: 1.7; fill: none; }
+  </style>
+
+  <!-- ============ PANEL 1: build the target order ============ -->
+  <rect x="18" y="42" width="964" height="204" rx="9" fill="#fbfcfd" stroke="#ccd4dd"/>
+  <text class="ttl" x="34" y="66">1&#160;&#160;Building the target order&#160;&#160;<tspan class="tag" fill="#7c8894">(offline — done once per window)</tspan></text>
+
+  <!-- point cloud -->
+  <g fill="#4f6f9c">
+    <circle cx="52" cy="112" r="1.8"/><circle cx="63" cy="108" r="1.8"/><circle cx="74" cy="112" r="1.8"/><circle cx="84" cy="110" r="1.8"/>
+    <circle cx="50" cy="124" r="1.8"/><circle cx="62" cy="122" r="1.8"/><circle cx="74" cy="126" r="1.8"/><circle cx="86" cy="123" r="1.8"/>
+    <circle cx="56" cy="136" r="1.8"/><circle cx="70" cy="138" r="1.8"/><circle cx="82" cy="136" r="1.8"/>
+  </g>
+  <text class="sub" x="68" y="160" text-anchor="middle">one window</text>
+  <text class="sub" x="68" y="173" text-anchor="middle">(point cloud)</text>
+
+  <path class="flow" d="M96,124 L128,124" marker-end="url(#arrow)"/>
+
+  <!-- encoder -->
+  <rect x="130" y="96" width="98" height="58" rx="6" fill="#e8eef5" stroke="#9db4cd" stroke-width="1.3"/>
+  <use href="#snow" x="212" y="110"/>
+  <text class="labb" x="174" y="121" text-anchor="middle">NOVA3R</text>
+  <text class="labb" x="174" y="138" text-anchor="middle">Encoder</text>
+  <text class="tag"  x="174" y="171" text-anchor="middle">frozen &#183; &#215;30 stochastic runs</text>
+
+  <path class="flow" d="M228,124 L258,124" marker-end="url(#arrow)"/>
+
+  <!-- three scrambled runs (unordered sets) -->
+  <!-- run 1 (anchor): c1 c2 c3 c4 c5 c6 -->
+  <g>
+    <rect x="266" y="88" width="16" height="16" rx="3" fill="#fbe0c2" stroke="#e8912f"/>
+    <rect x="286" y="88" width="16" height="16" rx="3" fill="#d3e3f4" stroke="#4f89c4"/>
+    <rect x="306" y="88" width="16" height="16" rx="3" fill="#d3ecdf" stroke="#46a07d"/>
+    <rect x="326" y="88" width="16" height="16" rx="3" fill="#f4d6df" stroke="#c65b7c"/>
+    <rect x="346" y="88" width="16" height="16" rx="3" fill="#e4dcf2" stroke="#8a6fc0"/>
+    <rect x="366" y="88" width="16" height="16" rx="3" fill="#f4ead0" stroke="#c9a83c"/>
+    <text class="tag" x="392" y="100">run 1 (anchor)</text>
+  </g>
+  <!-- run 2: c2 c4 c1 c6 c3 c5 -->
+  <g>
+    <rect x="266" y="110" width="16" height="16" rx="3" fill="#d3e3f4" stroke="#4f89c4"/>
+    <rect x="286" y="110" width="16" height="16" rx="3" fill="#f4d6df" stroke="#c65b7c"/>
+    <rect x="306" y="110" width="16" height="16" rx="3" fill="#fbe0c2" stroke="#e8912f"/>
+    <rect x="326" y="110" width="16" height="16" rx="3" fill="#f4ead0" stroke="#c9a83c"/>
+    <rect x="346" y="110" width="16" height="16" rx="3" fill="#d3ecdf" stroke="#46a07d"/>
+    <rect x="366" y="110" width="16" height="16" rx="3" fill="#e4dcf2" stroke="#8a6fc0"/>
+    <text class="tag" x="392" y="122">run 2</text>
+  </g>
+  <text class="sub" x="324" y="140" text-anchor="middle">&#8942;</text>
+  <!-- run 30: c5 c1 c4 c2 c6 c3 -->
+  <g>
+    <rect x="266" y="146" width="16" height="16" rx="3" fill="#e4dcf2" stroke="#8a6fc0"/>
+    <rect x="286" y="146" width="16" height="16" rx="3" fill="#fbe0c2" stroke="#e8912f"/>
+    <rect x="306" y="146" width="16" height="16" rx="3" fill="#f4d6df" stroke="#c65b7c"/>
+    <rect x="326" y="146" width="16" height="16" rx="3" fill="#d3e3f4" stroke="#4f89c4"/>
+    <rect x="346" y="146" width="16" height="16" rx="3" fill="#f4ead0" stroke="#c9a83c"/>
+    <rect x="366" y="146" width="16" height="16" rx="3" fill="#d3ecdf" stroke="#46a07d"/>
+    <text class="tag" x="392" y="158">run 30</text>
+  </g>
+  <text class="sub" x="324" y="184" text-anchor="middle">same cloud, different (unordered) token order</text>
+
+  <!-- align arrow -->
+  <path class="flow" d="M470,124 L540,124" marker-end="url(#arrow)"/>
+  <text class="sub" x="492" y="108" text-anchor="middle">Hungarian-align</text>
+  <text class="sub" x="492" y="119" text-anchor="middle">each run to anchor</text>
+
+  <!-- aligned stack (all canonical order now) -->
+  <rect x="553" y="100" width="118" height="16" rx="3" fill="#eef2f6" stroke="#c3ccd6"/>
+  <rect x="549" y="106" width="118" height="16" rx="3" fill="#f4f7fa" stroke="#c3ccd6"/>
+  <g>
+    <rect x="545" y="112" width="16" height="16" rx="3" fill="#fbe0c2" stroke="#e8912f"/>
+    <rect x="565" y="112" width="16" height="16" rx="3" fill="#d3e3f4" stroke="#4f89c4"/>
+    <rect x="585" y="112" width="16" height="16" rx="3" fill="#d3ecdf" stroke="#46a07d"/>
+    <rect x="605" y="112" width="16" height="16" rx="3" fill="#f4d6df" stroke="#c65b7c"/>
+    <rect x="625" y="112" width="16" height="16" rx="3" fill="#e4dcf2" stroke="#8a6fc0"/>
+    <rect x="645" y="112" width="16" height="16" rx="3" fill="#f4ead0" stroke="#c9a83c"/>
+  </g>
+  <text class="sub" x="606" y="150" text-anchor="middle">30 runs, now aligned</text>
+  <text class="sub" x="606" y="163" text-anchor="middle">to one canonical order</text>
+
+  <!-- mean arrow -->
+  <path class="flow" d="M672,120 L706,120" marker-end="url(#arrow)"/>
+  <text class="sub" x="689" y="110" text-anchor="middle">mean</text>
+
+  <!-- target z* + variance -->
+  <g>
+    <rect x="724" y="100" width="16" height="16" rx="3" fill="#fbe0c2" stroke="#e8912f"/>
+    <rect x="744" y="100" width="16" height="16" rx="3" fill="#d3e3f4" stroke="#4f89c4"/>
+    <rect x="764" y="100" width="16" height="16" rx="3" fill="#d3ecdf" stroke="#46a07d"/>
+    <rect x="784" y="100" width="16" height="16" rx="3" fill="#f4d6df" stroke="#c65b7c"/>
+    <rect x="804" y="100" width="16" height="16" rx="3" fill="#e4dcf2" stroke="#8a6fc0"/>
+    <rect x="824" y="100" width="16" height="16" rx="3" fill="#f4ead0" stroke="#c9a83c"/>
+  </g>
+  <!-- variance bars -->
+  <g fill="#aeb6bf">
+    <rect x="726" y="130" width="12" height="10"/>
+    <rect x="746" y="126" width="12" height="14"/>
+    <rect x="766" y="132" width="12" height="8"/>
+    <rect x="786" y="122" width="12" height="18"/>
+    <rect x="806" y="128" width="12" height="12"/>
+    <rect x="826" y="124" width="12" height="16"/>
+  </g>
+  <line x1="724" y1="140" x2="840" y2="140" stroke="#aeb6bf" stroke-width="0.8"/>
+  <text class="labb" x="782" y="158" text-anchor="middle" fill="#6b4a1c">target z*  (per window)</text>
+  <text class="sub"  x="782" y="171" text-anchor="middle">canonical order + per-token variance</text>
+
+  <!-- ============ PANEL 2: matching in the loss ============ -->
+  <rect x="18" y="272" width="964" height="252" rx="9" fill="#fbfcfd" stroke="#ccd4dd"/>
+  <text class="ttl" x="34" y="296">2&#160;&#160;Hungarian matching in the training loss&#160;&#160;<tspan class="tag" fill="#7c8894">(every step)</tspan></text>
+
+  <!-- adapter -->
+  <rect x="46" y="372" width="92" height="56" rx="6" fill="#fdf7ee" stroke="#d9a24e" stroke-width="1.4"/>
+  <use href="#flame" x="62" y="388"/>
+  <text class="labb" x="96" y="398" text-anchor="middle" fill="#6b4a1c">Adapter</text>
+  <text class="tag"  x="96" y="443" text-anchor="middle" fill="#a8792f">trained</text>
+  <path class="flow" d="M138,400 L176,400" marker-end="url(#arrow)"/>
+
+  <!-- predicted tokens column (scrambled): c3 c1 c5 c2 c6 c4 -->
+  <text class="lab" x="196" y="352" text-anchor="middle">predicted z&#770;</text>
+  <g>
+    <rect x="178" y="360" width="18" height="18" rx="3" fill="#d3ecdf" stroke="#46a07d"/>
+    <rect x="178" y="386" width="18" height="18" rx="3" fill="#fbe0c2" stroke="#e8912f"/>
+    <rect x="178" y="412" width="18" height="18" rx="3" fill="#e4dcf2" stroke="#8a6fc0"/>
+    <rect x="178" y="438" width="18" height="18" rx="3" fill="#d3e3f4" stroke="#4f89c4"/>
+    <rect x="178" y="464" width="18" height="18" rx="3" fill="#f4ead0" stroke="#c9a83c"/>
+    <rect x="178" y="490" width="18" height="18" rx="3" fill="#f4d6df" stroke="#c65b7c"/>
+  </g>
+
+  <!-- target tokens column (canonical): c1 c2 c3 c4 c5 c6 -->
+  <text class="lab" x="452" y="352" text-anchor="middle">target z*</text>
+  <g>
+    <rect x="444" y="360" width="18" height="18" rx="3" fill="#fbe0c2" stroke="#e8912f"/>
+    <rect x="444" y="386" width="18" height="18" rx="3" fill="#d3e3f4" stroke="#4f89c4"/>
+    <rect x="444" y="412" width="18" height="18" rx="3" fill="#d3ecdf" stroke="#46a07d"/>
+    <rect x="444" y="438" width="18" height="18" rx="3" fill="#f4d6df" stroke="#c65b7c"/>
+    <rect x="444" y="464" width="18" height="18" rx="3" fill="#e4dcf2" stroke="#8a6fc0"/>
+    <rect x="444" y="490" width="18" height="18" rx="3" fill="#f4ead0" stroke="#c9a83c"/>
+  </g>
+
+  <!-- matching lines (Hungarian assignment); colored by token -->
+  <g stroke-width="1.8" fill="none" opacity="0.85">
+    <path d="M196,369 L444,421" stroke="#46a07d"/>   <!-- c3: pred0 -> tgt2 -->
+    <path d="M196,395 L444,369" stroke="#e8912f"/>   <!-- c1: pred1 -> tgt0 -->
+    <path d="M196,421 L444,473" stroke="#8a6fc0"/>   <!-- c5: pred2 -> tgt4 -->
+    <path d="M196,447 L444,395" stroke="#4f89c4"/>   <!-- c2: pred3 -> tgt1 -->
+    <path d="M196,473 L444,499" stroke="#c9a83c"/>   <!-- c6: pred4 -> tgt5 -->
+    <path d="M196,499 L444,447" stroke="#c65b7c"/>   <!-- c4: pred5 -> tgt3 -->
+  </g>
+  <text class="sub" x="320" y="530" text-anchor="middle">min-cost assignment (Hungarian) &#8594; permutation &#928;*</text>
+
+  <!-- arrow to loss -->
+  <path class="flow" d="M472,434 L560,434" marker-end="url(#arrow)"/>
+
+  <!-- loss box -->
+  <rect x="566" y="398" width="392" height="74" rx="8" fill="#eef2f6" stroke="#9db4cd"/>
+  <text class="labb" x="762" y="422" text-anchor="middle">matched MSE loss</text>
+  <text class="lab"  x="762" y="450" text-anchor="middle">L = &#8721;<tspan font-size="10" dy="4">i</tspan><tspan dy="-4"> &#8214; z&#770;</tspan><tspan font-size="10" dy="4">i</tspan><tspan dy="-4"> &#8722; z*</tspan><tspan font-size="10" dy="4">&#960;*(i)</tspan><tspan dy="-4"> &#8214;</tspan><tspan dy="-5" font-size="10">2</tspan></text>
+  <text class="tag"  x="762" y="468" text-anchor="middle">only matched pairs are compared</text>
+
+  <!-- ============ bottom note ============ -->
+  <rect x="18" y="540" width="964" height="42" rx="8" fill="#fdf7ee" stroke="#e6c58e"/>
+  <text class="lab" x="500" y="559" text-anchor="middle" fill="#6b4a1c">Tokens are a permutation-invariant <tspan font-weight="600">set</tspan> — matching runs <tspan font-weight="600">within a single window</tspan> only</text>
+  <text class="sub" x="500" y="573" text-anchor="middle" fill="#8a6a34">samples&#8596;anchor when building z*, and z&#770;&#8596;z* when training — never across different scenes / point clouds</text>
+</svg>

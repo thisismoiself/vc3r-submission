@@ -1,0 +1,10 @@
+channels:
+  - pytorch3d
+  - pytorch
+  - nvidia
+  - conda-forge
+dependencies:
+  - python=3.12.13
+  - pip=25.0.1
+  - setuptools=70.2.0
+  - pytorch3d=0.7.8=py312_cu121_pyt241

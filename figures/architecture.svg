@@ -1,0 +1,188 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="560" viewBox="0 0 1180 560" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,1 L8,4.5 L0,8 Z" fill="#54606b"/>
+    </marker>
+    <marker id="arrowB" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,1 L8,4.5 L0,8 Z" fill="#7fa0c8"/>
+    </marker>
+    <g id="snow">
+      <g stroke="#5b83b0" stroke-width="1.3" stroke-linecap="round">
+        <line x1="0" y1="-6" x2="0" y2="6"/>
+        <line x1="-5.2" y1="-3" x2="5.2" y2="3"/>
+        <line x1="-5.2" y1="3" x2="5.2" y2="-3"/>
+      </g>
+    </g>
+    <g id="flame">
+      <path d="M0,-7 C4.2,-2.5 5,2 0,7 C-5,2 -4.2,-2.5 0,-7 Z" fill="#e8912f"/>
+      <path d="M0,-1 C2,1 2,3.4 0,5 C-2,3.4 -2,1 0,-1 Z" fill="#f6d18a"/>
+    </g>
+  </defs>
+
+  <style>
+    .lab  { font-size: 14px; fill: #2b2f36; }
+    .labb { font-size: 14px; fill: #2b2f36; font-weight: 600; }
+    .sub  { font-size: 11px; fill: #6b7783; }
+    .tag  { font-size: 10.5px; fill: #7c8894; }
+    .flow { stroke: #54606b; stroke-width: 1.8; fill: none; }
+  </style>
+
+  <!-- ===================== MAIN PIPELINE ===================== -->
+
+  <!-- input multi-view window -->
+  <rect x="40" y="86"  width="70" height="52" rx="3" fill="#dfe6ee" stroke="#9db4cd"/>
+  <rect x="33" y="94"  width="70" height="52" rx="3" fill="#e9eef4" stroke="#9db4cd"/>
+  <rect x="26" y="102" width="70" height="52" rx="3" fill="#f4f7fa" stroke="#8aa3c0"/>
+  <circle cx="47" cy="127" r="6" fill="none" stroke="#8aa3c0"/>
+  <path d="M60,142 L72,120 L84,142 Z" fill="none" stroke="#8aa3c0"/>
+  <text class="sub" x="61" y="172" text-anchor="middle">multi-view</text>
+  <text class="sub" x="61" y="185" text-anchor="middle">window (N frames)</text>
+
+  <path class="flow" d="M104,128 L140,128" marker-end="url(#arrow)"/>
+
+  <!-- DA3 encoder (frozen) -->
+  <rect x="144" y="90" width="98" height="76" rx="6" fill="#e8eef5" stroke="#9db4cd" stroke-width="1.4"/>
+  <use href="#snow" x="226" y="106"/>
+  <text class="labb" x="188" y="126" text-anchor="middle">DA3</text>
+  <text class="labb" x="188" y="143" text-anchor="middle">Encoder</text>
+  <text class="tag"  x="188" y="181" text-anchor="middle">frozen</text>
+
+  <path class="flow" d="M242,128 L280,128" marker-end="url(#arrow)"/>
+
+  <!-- DA3 image tokens -->
+  <g fill="#cddcf0" stroke="#7fa0c8" stroke-width="0.8">
+    <rect x="286" y="98"  width="11" height="11" rx="1.5"/><rect x="299" y="98"  width="11" height="11" rx="1.5"/><rect x="312" y="98"  width="11" height="11" rx="1.5"/><rect x="325" y="98"  width="11" height="11" rx="1.5"/>
+    <rect x="286" y="111" width="11" height="11" rx="1.5"/><rect x="299" y="111" width="11" height="11" rx="1.5"/><rect x="312" y="111" width="11" height="11" rx="1.5"/><rect x="325" y="111" width="11" height="11" rx="1.5"/>
+    <rect x="286" y="124" width="11" height="11" rx="1.5"/><rect x="299" y="124" width="11" height="11" rx="1.5"/><rect x="312" y="124" width="11" height="11" rx="1.5"/><rect x="325" y="124" width="11" height="11" rx="1.5"/>
+    <rect x="286" y="137" width="11" height="11" rx="1.5"/><rect x="299" y="137" width="11" height="11" rx="1.5"/><rect x="312" y="137" width="11" height="11" rx="1.5"/><rect x="325" y="137" width="11" height="11" rx="1.5"/>
+  </g>
+  <text class="sub" x="311" y="172" text-anchor="middle">image tokens</text>
+  <text class="sub" x="311" y="185" text-anchor="middle">(N &#215; 2048)</text>
+
+  <path class="flow" d="M340,128 L372,128" marker-end="url(#arrow)"/>
+
+  <!-- ADAPTER container (trainable) -->
+  <rect x="376" y="52" width="386" height="152" rx="9" fill="#fdf7ee" stroke="#d9a24e" stroke-width="1.6"/>
+  <use href="#flame" x="393" y="70"/>
+  <text class="labb" x="571" y="74" text-anchor="middle" fill="#6b4a1c">Token-Alignment Adapter</text>
+  <text class="tag"  x="748" y="72" text-anchor="end" fill="#a8792f">trained</text>
+
+  <!-- learnable queries -->
+  <g fill="#f6d9b0" stroke="#d9a24e" stroke-width="0.8">
+    <rect x="398" y="98"  width="12" height="12" rx="1.5"/>
+    <rect x="398" y="112" width="12" height="12" rx="1.5"/>
+    <rect x="398" y="126" width="12" height="12" rx="1.5"/>
+    <rect x="398" y="140" width="12" height="12" rx="1.5"/>
+    <rect x="398" y="154" width="12" height="12" rx="1.5"/>
+  </g>
+  <text class="sub" x="404" y="186" text-anchor="middle">learnable</text>
+  <text class="sub" x="404" y="198" text-anchor="middle">queries</text>
+
+  <path class="flow" d="M416,132 L446,132" marker-end="url(#arrow)"/>
+
+  <!-- alignment block (stacked to imply x L) -->
+  <rect x="470" y="100" width="126" height="70" rx="7" fill="#fff" stroke="#c98f3f" opacity="0.55"/>
+  <rect x="463" y="94"  width="126" height="70" rx="7" fill="#fdeecf" stroke="#c98f3f" stroke-width="1.3"/>
+  <text class="labb" x="526" y="123" text-anchor="middle" fill="#6b4a1c">Alignment</text>
+  <text class="labb" x="526" y="140" text-anchor="middle" fill="#6b4a1c">Block</text>
+  <text class="tag"  x="526" y="157" text-anchor="middle" fill="#a8792f">&#215; L = 4</text>
+
+  <path class="flow" d="M591,132 L622,132" marker-end="url(#arrow)"/>
+
+  <!-- out projection -->
+  <rect x="624" y="104" width="42" height="58" rx="5" fill="#f6e6cf" stroke="#d9a24e"/>
+  <text class="sub" x="645" y="129" text-anchor="middle" fill="#6b4a1c">out</text>
+  <text class="sub" x="645" y="142" text-anchor="middle" fill="#6b4a1c">proj</text>
+
+  <path class="flow" d="M666,132 L694,132" marker-end="url(#arrow)"/>
+
+  <!-- predicted tokens -->
+  <g fill="#f6d9b0" stroke="#d9a24e" stroke-width="0.9">
+    <rect x="700" y="102" width="12" height="12" rx="1.5"/>
+    <rect x="700" y="116" width="12" height="12" rx="1.5"/>
+    <rect x="700" y="130" width="12" height="12" rx="1.5"/>
+    <rect x="700" y="144" width="12" height="12" rx="1.5"/>
+    <rect x="700" y="158" width="12" height="12" rx="1.5"/>
+  </g>
+  <text class="sub" x="706" y="188" text-anchor="middle">tokens z&#770;</text>
+
+  <path class="flow" d="M770,128 L812,128" marker-end="url(#arrow)"/>
+  <text class="sub" x="791" y="118" text-anchor="middle">(768 &#215; 128)</text>
+
+  <!-- NOVA3R decoder (frozen) -->
+  <rect x="816" y="90" width="104" height="76" rx="6" fill="#e8eef5" stroke="#9db4cd" stroke-width="1.4"/>
+  <use href="#snow" x="904" y="106"/>
+  <text class="labb" x="868" y="126" text-anchor="middle">NOVA3R</text>
+  <text class="labb" x="868" y="143" text-anchor="middle">Decoder</text>
+  <text class="tag"  x="868" y="181" text-anchor="middle">frozen</text>
+
+  <path class="flow" d="M920,128 L960,128" marker-end="url(#arrow)"/>
+
+  <!-- point cloud -->
+  <g fill="#4f6f9c">
+    <circle cx="1010" cy="112" r="2"/><circle cx="1022" cy="108" r="2"/><circle cx="1034" cy="112" r="2"/><circle cx="1046" cy="110" r="2"/><circle cx="1058" cy="114" r="2"/>
+    <circle cx="1006" cy="124" r="2"/><circle cx="1018" cy="122" r="2"/><circle cx="1030" cy="126" r="2"/><circle cx="1044" cy="124" r="2"/><circle cx="1058" cy="126" r="2"/><circle cx="1068" cy="122" r="2"/>
+    <circle cx="1012" cy="136" r="2"/><circle cx="1026" cy="138" r="2"/><circle cx="1040" cy="136" r="2"/><circle cx="1054" cy="138" r="2"/><circle cx="1066" cy="136" r="2"/>
+    <circle cx="1018" cy="150" r="2"/><circle cx="1032" cy="150" r="2"/><circle cx="1050" cy="150" r="2"/>
+    <circle cx="1016" cy="162" r="2"/><circle cx="1052" cy="162" r="2"/>
+  </g>
+  <text class="sub" x="1038" y="185" text-anchor="middle">reconstructed</text>
+  <text class="sub" x="1038" y="198" text-anchor="middle">point cloud</text>
+
+  <!-- ===================== ZOOM: ALIGNMENT BLOCK ===================== -->
+  <path d="M470,164 C438,214 392,224 372,258" stroke="#c98f3f" stroke-width="1" stroke-dasharray="4 3" fill="none"/>
+  <path d="M589,164 C650,214 700,224 720,258" stroke="#c98f3f" stroke-width="1" stroke-dasharray="4 3" fill="none"/>
+
+  <rect x="360" y="258" width="460" height="290" rx="9" fill="#fffdf9" stroke="#d9a24e" stroke-width="1.3"/>
+  <text class="labb" x="380" y="282" fill="#6b4a1c">Alignment Block</text>
+  <text class="tag"  x="800" y="282" text-anchor="end" fill="#a8792f">pre-LayerNorm, residual</text>
+
+  <!-- input query tokens -->
+  <rect x="466" y="296" width="158" height="24" rx="4" fill="#fdeecf" stroke="#c98f3f"/>
+  <text class="lab" x="545" y="313" text-anchor="middle" fill="#6b4a1c">query tokens</text>
+
+  <!-- sublayer 1: self-attention -->
+  <circle cx="545" cy="326" r="2.3" fill="#8a7b63"/>
+  <path class="flow" d="M545,326 L545,332" marker-end="url(#arrow)"/>
+  <rect x="466" y="332" width="158" height="38" rx="6" fill="#eaf1fa" stroke="#8aa3c0"/>
+  <text class="lab" x="545" y="349" text-anchor="middle">Self-Attention</text>
+  <text class="sub" x="545" y="363" text-anchor="middle">queries &#8594; queries</text>
+  <path d="M545,326 L430,326 L430,386 L538,386" stroke="#8a7b63" stroke-width="1.3" fill="none"/>
+  <path class="flow" d="M545,370 L545,383" marker-end="url(#arrow)"/>
+  <circle cx="545" cy="386" r="7" fill="#fff" stroke="#54606b"/>
+  <text class="lab" x="545" y="390" text-anchor="middle" fill="#54606b">+</text>
+
+  <!-- sublayer 2: cross-attention -->
+  <circle cx="545" cy="400" r="2.3" fill="#8a7b63"/>
+  <path class="flow" d="M545,393 L545,406" marker-end="url(#arrow)"/>
+  <rect x="466" y="406" width="158" height="42" rx="6" fill="#fdf0dd" stroke="#d9a24e"/>
+  <text class="lab" x="545" y="423" text-anchor="middle" fill="#6b4a1c">Cross-Attention</text>
+  <text class="sub" x="545" y="438" text-anchor="middle">Q = queries &#160; K,V = DA3 tokens</text>
+  <path d="M545,400 L430,400 L430,462 L538,462" stroke="#8a7b63" stroke-width="1.3" fill="none"/>
+  <path class="flow" d="M545,448 L545,459" marker-end="url(#arrow)"/>
+  <circle cx="545" cy="462" r="7" fill="#fff" stroke="#54606b"/>
+  <text class="lab" x="545" y="466" text-anchor="middle" fill="#54606b">+</text>
+
+  <!-- DA3 tokens feeding K,V from the right -->
+  <g fill="#cddcf0" stroke="#7fa0c8" stroke-width="0.7">
+    <rect x="704" y="404" width="9" height="9" rx="1"/><rect x="715" y="404" width="9" height="9" rx="1"/><rect x="726" y="404" width="9" height="9" rx="1"/>
+    <rect x="704" y="415" width="9" height="9" rx="1"/><rect x="715" y="415" width="9" height="9" rx="1"/><rect x="726" y="415" width="9" height="9" rx="1"/>
+    <rect x="704" y="426" width="9" height="9" rx="1"/><rect x="715" y="426" width="9" height="9" rx="1"/><rect x="726" y="426" width="9" height="9" rx="1"/>
+  </g>
+  <text class="sub" x="720" y="450" text-anchor="middle">DA3 tokens</text>
+  <path d="M702,424 L628,424" stroke="#7fa0c8" stroke-width="1.6" fill="none" stroke-dasharray="4 3" marker-end="url(#arrowB)"/>
+
+  <!-- sublayer 3: feed-forward -->
+  <circle cx="545" cy="476" r="2.3" fill="#8a7b63"/>
+  <path class="flow" d="M545,469 L545,482" marker-end="url(#arrow)"/>
+  <rect x="466" y="482" width="158" height="38" rx="6" fill="#eef0f3" stroke="#a9b0ba"/>
+  <text class="lab" x="545" y="499" text-anchor="middle">Feed-Forward (MLP)</text>
+  <text class="sub" x="545" y="513" text-anchor="middle">per-token, 4&#215; hidden</text>
+  <path d="M545,476 L430,476 L430,534 L538,534" stroke="#8a7b63" stroke-width="1.3" fill="none"/>
+  <path class="flow" d="M545,520 L545,531" marker-end="url(#arrow)"/>
+  <circle cx="545" cy="534" r="7" fill="#fff" stroke="#54606b"/>
+  <text class="lab" x="545" y="538" text-anchor="middle" fill="#54606b">+</text>
+  <path class="flow" d="M552,534 L618,534" marker-end="url(#arrow)"/>
+  <text class="sub" x="624" y="531" fill="#a8792f">updated query tokens</text>
+  <text class="sub" x="624" y="544" fill="#a8792f">&#8594; next block</text>
+</svg>

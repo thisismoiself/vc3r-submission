@@ -1,0 +1,42 @@
+# Temporary config for the 50-window seen-validation overfit run.
+replica_root: /home/nic/repos/rci/courses/sa/vc3r/datasets/replica
+room: room0
+frame_stride: 20
+num_frames: 8
+image_width: 518
+image_height: 392
+
+nova3r_ckpt: /home/nic/repos/rci/courses/sa/vc3r/checkpoints/nova3r/scene_ae/checkpoint-last.pth
+da3_model: depth-anything/DA3-LARGE-1.1
+da3_source_layer_index: 3
+da3_max_source_tokens: 2048
+mesh_sample_points: 8192
+
+source_dim: 2048
+hidden_dim: 512
+target_tokens: 768
+target_dim: 128
+depth: 4
+num_heads: 8
+
+steps: 3000
+batch_size: 16
+best_checkpoint_every_samples: 1000
+lr: 1.0e-4
+weight_decay: 1.0e-4
+log_every: 10
+
+data_dir: experiments/overfit_8frames/data
+ckpt_dir: experiments/overfit_8frames/checkpoints
+
+train_rooms:
+  - room0
+test_rooms:
+  - room0
+samples_per_room: 50
+heldout_eval: false
+eval_samples: 1
+eval_num_queries: 768
+
+wandb_project: da3-nova3r-adapter
+wandb_run_name: room0_N50_s20_seen_eval_3k

@@ -1,0 +1,35 @@
+# Downloaded model artifacts
+checkpoints/da3/
+checkpoints/nova3r/
+datasets/
+
+# Replica from NICE SLAM
+datasets/replica/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# MacOS system files
+.DS_Store
+
+# Large outputs / caches / vendored repos (kept on disk, NOT in git)
+outputs/
+.hf_cache/
+Depth-Anything-3/
+.claude/
+*.log
+*.out
+*.npz
+*.ply
+*.pth
+*.glb
+
+logs/
+.vscode/
+.codex/
+.conda/
+AGENTS.md
+
+outputs/
+wandb/

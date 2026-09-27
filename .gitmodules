@@ -1,0 +1,6 @@
+[submodule "nova3r"]
+	path = nova3r
+	url = https://github.com/wrchen530/nova3r.git
+[submodule "da3"]
+	path = da3
+	url = https://github.com/bytedance-seed/depth-anything-3.git
