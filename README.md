@@ -117,7 +117,10 @@ Omitting `--max-windows` evaluates all 25 Office4 windows. Results are written
 to `outputs/replica/stitch_office4_four_dataset_gtfree/` and include the
 stitched point clouds, per-window data, and `metrics.json`.
 
-The checkpoints are interchangeable. Our report states the differences in training among them. 
+The checkpoints are interchangeable. Our report further explains the differences in training among them:
+- `replica-gtfree.pt`: Trained through token-matched MSE + velocity loss only on Replica (synthetic)
+- `replica-nrgbd-gtfree.pt`: Trained through token-matched MSE + velocity loss on Replica (synthetic) and NeuralRGBD (synthetic)
+- `replica-nrgbd-7scenes-scannetpp.pt`: Trained on only token-matched loss on Replica (synthetic), NeuralRGBD (synthetic), 7scenes (real-world) and ScanNet++ (real-world)
 
 
 ## Different datasets can be evaluated similary after preparing and providing them in the same folder structure
