@@ -39,6 +39,8 @@ Provide the remaining artifacts using this layout:
 ```text
 checkpoints/
 ├── replica-gtfree.pt
+├── replica-nrgbd-gtfree.pt
+├── replica-nrgbd-7scenes-scannetpp.pt
 ├── da3/DA3-LARGE-1.1/
 │   ├── config.json
 │   └── model.safetensors
@@ -98,7 +100,7 @@ SLURM execution uses the same evaluator arguments:
 
 ```bash
 sbatch scripts/slurm/eval_office4.sbatch \
-  checkpoints/replica-gtfree.pt \
+  checkpoints/replica-nrgbd-7scenes-scannetpp.pt \
   --room office4 \
   --complete-target \
   --da3pose-tokens \
@@ -110,12 +112,12 @@ sbatch scripts/slurm/eval_office4.sbatch \
   --seed 42 \
   --da3-model checkpoints/da3/DA3-LARGE-1.1 \
   --offline \
-  --out-tag replica_gtfree
+  --out-tag four_dataset_gtfree
 ```
 
 Omitting `--max-windows` evaluates all 25 Office4 windows. Results are written
-to `outputs/replica/stitch_office4_replica_gtfree/` and include the
-stitched point clouds, per-window data, and `metrics.json`.
+to `outputs/replica/stitch_office4_<out-tag>/` (e.g. `stitch_office4_replica_gtfree/`)
+and include the stitched point clouds, per-window data, and `metrics.json`.
 
 The checkpoints are interchangeable. Our report further explains the differences in training among them:
 - `replica-gtfree.pt`: Trained through token-matched MSE + velocity loss only on Replica (synthetic)
