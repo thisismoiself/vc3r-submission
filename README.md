@@ -6,7 +6,7 @@ of the four-dataset model on the Replica `office4` scene.
 ## 1. Clone the repository
 
 ```bash
-git clone --recurse-submodules --branch prep-main <REPOSITORY_URL> vc3r
+git clone --recurse-submodules --branch main <REPOSITORY_URL> vc3r
 cd vc3r
 ```
 
@@ -38,7 +38,7 @@ Provide the remaining artifacts using this layout:
 
 ```text
 checkpoints/
-├── replica-nrgbd-7scenes-scannetpp.pt
+├── replica-gtfree.pt
 ├── da3/DA3-LARGE-1.1/
 │   ├── config.json
 │   └── model.safetensors
@@ -78,7 +78,7 @@ Local execution:
 
 ```bash
 scripts/reproduce_office4.sh \
-  checkpoints/replica-nrgbd-7scenes-scannetpp.pt \
+  checkpoints/replica-gtfree.pt \
   datasets/replica \
   --room office4 \
   --complete-target \
@@ -91,14 +91,14 @@ scripts/reproduce_office4.sh \
   --seed 42 \
   --da3-model checkpoints/da3/DA3-LARGE-1.1 \
   --offline \
-  --out-tag four_dataset_gtfree
+  --out-tag replica_gtfree
 ```
 
 SLURM execution uses the same evaluator arguments:
 
 ```bash
 sbatch scripts/slurm/eval_office4.sbatch \
-  checkpoints/replica-nrgbd-7scenes-scannetpp.pt \
+  checkpoints/replica-gtfree.pt \
   --room office4 \
   --complete-target \
   --da3pose-tokens \
@@ -110,11 +110,11 @@ sbatch scripts/slurm/eval_office4.sbatch \
   --seed 42 \
   --da3-model checkpoints/da3/DA3-LARGE-1.1 \
   --offline \
-  --out-tag four_dataset_gtfree
+  --out-tag replica_gtfree
 ```
 
 Omitting `--max-windows` evaluates all 25 Office4 windows. Results are written
-to `outputs/replica/stitch_office4_four_dataset_gtfree/` and include the
+to `outputs/replica/stitch_office4_replica_gtfree/` and include the
 stitched point clouds, per-window data, and `metrics.json`.
 
 The checkpoints are interchangeable. Our report further explains the differences in training among them:
